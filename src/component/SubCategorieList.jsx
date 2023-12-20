@@ -4,20 +4,22 @@ import { MyStoreContext } from "../context/MyStore";
 import "../styles/subcatagories.css";
 
 export function SubCategories({ productId }) {
-  const { subCatagories, selectedSubCatagories, addSubCatagory } =
+  const { subCatagories, selectedSubCatagories, addSubCategory } =
     useContext(MyStoreContext);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const subCatagoryArray = subCatagories?.filter(
+  const subCatagoriesByProductId = subCatagories?.filter(
     (subCatagory) => subCatagory.productId === productId
   );
 
-  const filteredsubCatagoryArray = subCatagoryArray?.filter(
-    (filteredsubCatagory) =>
-      filteredsubCatagory.subCategoryName
+  const filteredsubCatagoryArray = subCatagoriesByProductId?.filter(
+    (subCatagory) =>
+      subCatagory.subCategoryName
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
   );
+
+  console.log(filteredsubCatagoryArray)
 
   function handleSearchQuery(e) {
     setSearchQuery(e.target.value);
@@ -45,7 +47,7 @@ export function SubCategories({ productId }) {
                 type="checkbox"
                 id={subCatagory.productId}
                 name={subCatagory.subCategoryName}
-                onClick={() => addSubCatagory(subCatagory.subCategoryId)}
+                onClick={() => addSubCategory(subCatagory)}
               />
               {selectedSubCatagories[subCatagory.subCategoryId] && (
                 <SubProduct subCategoryId={subCatagory.subCategoryId} />

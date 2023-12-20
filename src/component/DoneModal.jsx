@@ -4,9 +4,6 @@ import { MyStoreContext } from "../context/MyStore";
 
 export function DoneModal({ handleCloseModal }) {
   const {
-    products,
-    subCatagories,
-    subProducts,
     selectedProducts,
     selectedSubCatagories,
     selectedSubProducts,
@@ -18,35 +15,20 @@ export function DoneModal({ handleCloseModal }) {
   // return productName
   // filter if null
 
-  const productsToDisplay = Object.keys(selectedProducts)
-    .filter((keyId) => selectedProducts[keyId])
-    .map((keyId) => {
-      const product = products.find(
-        (prod) => prod.productId === parseInt(keyId)
-      );
-      return product ? product.productName : null;
-    })
-    .filter((productName) => productName !== null);
+  const productsToDisplay =
+      Object.values(selectedProducts)
+          .filter((product) => product.isSelected)
+          .map((selectedProduct) => selectedProduct.product.productName)
 
-  const subCategoriesToDisplay = Object.keys(selectedSubCatagories)
-    .filter((keyId) => selectedSubCatagories[keyId])
-    .map((keyId) => {
-      const subCategory = subCatagories.find(
-        (subCat) => subCat.subCategoryId === parseInt(keyId)
-      );
-      return subCategory ? subCategory.subCategoryName : null;
-    })
-    .filter((subCatagorieName) => subCatagorieName !== null);
+  const subCategoriesToDisplay =
+      Object.values(selectedSubCatagories)
+          .filter((subCatagory) => subCatagory.isSelected)
+          .map((ssc) => ssc.subcategory.subCategoryName )
 
-  const subProductsToDisplay = Object.keys(selectedSubProducts)
-    .filter((keyId) => selectedSubProducts[keyId])
-    .map((keyId) => {
-      const subProduct = subProducts.find(
-        (subProd) => subProd.subProductId === parseInt(keyId)
-      );
-      return subProduct ? subProduct.subProductName : null;
-    })
-    .filter((subProductName) => subProductName !== null);
+  const subProductsToDisplay =
+      Object.values(selectedSubProducts)
+          .filter((subProduct) => subProduct.isSelected)
+          .map((ssp) => ssp.subproduct.subProductName)
 
   return (
     <div className="doneModal">

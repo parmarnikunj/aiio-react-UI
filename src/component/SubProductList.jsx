@@ -41,7 +41,7 @@ export function SubProduct({ subCategoryId }) {
                 type="checkbox"
                 id={subProduct.subProductId}
                 name={subProduct.subProductName}
-                onChange={() => addSubProduct(subProduct.subProductId)}
+                onChange={() => addSubProduct(subProduct)}
               />
             </div>
           ))}

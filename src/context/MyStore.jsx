@@ -51,32 +51,48 @@ export function MyStoreContextProvider(props) {
     fetchsubProducts();
   }, []);
 
-  const addSelectedProduct = (productId) => {
+  const addSelectedProduct = (product) => {
     setSelectedProducts({
       ...selectedProducts,
-      [productId]: !selectedProducts[productId],
+      [product.productId]: {
+        isSelected: selectedProducts[product.productId] ? !selectedProducts[product.productId].isSelected : true,
+        product
+  },
     });
+    console.log("productDict : ")
+    console.log(selectedProducts)
   };
 
-  const addSubCatagory = (subcatgoryId) => {
+  const addSubCategory = (subcategory) => {
     setSelectedSubCatagories({
       ...selectedSubCatagories,
-      [subcatgoryId]: !selectedSubCatagories[subcatgoryId],
+      [subcategory.subCategoryId]: {
+        isSelected: selectedSubCatagories[subcategory.subCategoryId] ? !selectedSubCatagories[subcategory.subCategoryId].isSelected : true,
+        subcategory
+  },
     });
+    console.log("subcatagory Dict: ")
+    console.log(selectedSubCatagories)
   };
 
-  const addSubProduct = (subproductId) => {
+  const addSubProduct = (subproduct) => {
     setSelectedSubProducts({
       ...selectedSubProducts,
-      [subproductId]: !selectedSubProducts[subproductId],
+      [subproduct.subProductId]: {
+        isSelected: selectedSubProducts[subproduct.subProductId] ? !selectedSubProducts[subproduct.subProductId] : true,
+        subproduct
+      }
     });
+
+    console.log("subProductDict:")
+    console.log(selectedSubProducts)
   };
   const contextValue = {
     products,
     subCatagories,
     subProducts,
     addSelectedProduct,
-    addSubCatagory,
+    addSubCategory,
     addSubProduct,
     selectedProducts,
     selectedSubCatagories,

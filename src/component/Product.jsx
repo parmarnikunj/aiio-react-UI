@@ -13,7 +13,7 @@ const Product = ({ product }) => {
         id={product.productId}
         name={product.productName}
         onClick={() => {
-          addSelectedProduct(product.productId);
+          addSelectedProduct(product);
         }}
       />
     </div>
